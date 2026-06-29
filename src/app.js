@@ -1,5 +1,6 @@
 import express from "express";
 const app = express()
+import cors from "cors";
 
 app.use(express.json({ limit: "50mb"}));
 app.use(express.urlencoded({extended: true}));
@@ -13,6 +14,10 @@ app.use(
         allowHeaders: ["Content-Type", "Authorization"],
     }),
 )
+
+import healthCheckRouter from "./routes/healthcheck.routes.js";
+app.use("/api/v1/healthcheck", healthCheckRouter);
+
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
