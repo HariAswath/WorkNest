@@ -1,5 +1,5 @@
 import { body } from "express-validator";
-import { AvailableUserRole } from "../utils/constants.js";
+import { AvailableUserRole } from "../utils/constant.js";
 const userRegisterValidator = () => {
   return [
     body("email")
@@ -27,3 +27,5 @@ const userLoginValidator = () => {
     body("password").notEmpty().withMessage("Password is required"),
   ];
 };
+
+export { userRegisterValidator, userLoginValidator };
