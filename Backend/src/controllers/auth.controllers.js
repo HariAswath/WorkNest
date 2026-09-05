@@ -4,9 +4,11 @@ import {ApiError} from "../utils/api-error.js";
 import { asyncHandler } from "../utils/async-handler.js";
 import {
   emailVerificationMailgenContent,
+  forgotPasswordMailgenContent,
   sendEmail,
 } from "../utils/mail.js";
 import jwt from "jsonwebtoken";
+import crypto from "crypto";
 
 const registerUser = asyncHandler(async (req, res) => {
     const { email, username, password, role } = req.body;
@@ -35,7 +37,7 @@ const registerUser = asyncHandler(async (req, res) => {
         subject: "Please verify your email",
         mailgenContent: emailVerificationMailgenContent(
         user.username,
-        `${req.protocol}://${req.get("host")}/api/v1/users/verify-email/${unHashedToken}`,
+        `${req.protocol}://${req.get("host")}/api/v1/auth/verify-email/${unHashedToken}`,
         ),
     });
     const createdUser = await User.findById(user._id).select(
@@ -213,7 +215,7 @@ const resendEmailVerification = asyncHandler(async (req, res) => {
     subject: "Please verify your email",
     mailgenContent: emailVerificationMailgenContent(
       user.username,
-      `${req.protocol}://${req.get("host")}/api/v1/users/verify-email/${unHashedToken}`,
+      `${req.protocol}://${req.get("host")}/api/v1/auth/verify-email/${unHashedToken}`,
     ),
   });
 
@@ -274,7 +276,7 @@ const resetForgotPassword = asyncHandler(async (req, res) => {
   });
 
   if (!user) {
-    throw new ApiError(489, "Token is invalid or expired");
+    throw new ApiError(400, "Token is invalid or expired");
   }
 
   user.forgotPasswordExpiry = undefined;
