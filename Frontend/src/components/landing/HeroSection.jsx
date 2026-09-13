@@ -7,7 +7,7 @@ export function HeroSection() {
   const navigate = useNavigate();
 
   return (
-    <section className="relative min-h-[92vh] sm:min-h-[96vh] flex flex-col justify-center items-center pt-32 pb-20 px-4 overflow-hidden" data-purpose="hero-section">
+    <section className="relative min-h-[92vh] sm:min-h-[96vh] flex flex-col justify-center items-center pt-32 pb-20 px-4 overflow-hidden" data-purpose="hero-section" id="hero">
       {/* Shader & Atmosphere Layer Container */}
       <div aria-hidden="true" className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         <PrismShader />
