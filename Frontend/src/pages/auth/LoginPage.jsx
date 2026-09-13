@@ -18,7 +18,7 @@ export default function LoginPage() {
   const [localError, setLocalError] = useState('');
 
   // Destination if redirected
-  const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from?.pathname || '/dashboard';
 
   const handleChange = (e) => {
     setFormData((prev) => ({
