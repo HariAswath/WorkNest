@@ -160,6 +160,11 @@ const addMembersToProject = asyncHandler(async (req, res) => {
 
 const getProjectMembers = asyncHandler(async (req, res) => {
   const { projectId } = req.params;
+
+  if (!projectId || !mongoose.isValidObjectId(projectId)) {
+    throw new ApiError(400, "Valid project ID is required");
+  }
+
   const project = await Project.findById(projectId);
 
   if (!project) {

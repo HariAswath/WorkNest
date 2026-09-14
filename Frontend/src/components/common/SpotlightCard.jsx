@@ -1,12 +1,18 @@
 import React, { useRef, useState } from 'react';
 
-const SpotlightCard = ({ children, className = '', spotlightColor = 'rgba(255, 255, 255, 0.25)' }) => {
+const SpotlightCard = ({
+  children,
+  className = '',
+  spotlightColor = 'rgba(255, 255, 255, 0.25)',
+  onClick,
+  ...props
+}) => {
   const divRef = useRef(null);
   const [isFocused, setIsFocused] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState(0);
 
-  const handleMouseMove = e => {
+  const handleMouseMove = (e) => {
     if (!divRef.current || isFocused) return;
 
     const rect = divRef.current.getBoundingClientRect();
@@ -39,16 +45,18 @@ const SpotlightCard = ({ children, className = '', spotlightColor = 'rgba(255, 2
       onBlur={handleBlur}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={onClick}
       className={`relative rounded-3xl border border-neutral-800 bg-neutral-900 overflow-hidden p-8 ${className}`}
+      {...props}
     >
       <div
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 ease-in-out"
         style={{
           opacity,
-          background: `radial-gradient(circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 80%)`
+          background: `radial-gradient(circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 80%)`,
         }}
       />
-      <div className="relative z-10">
+      <div className="relative z-10 w-full h-full">
         {children}
       </div>
     </div>

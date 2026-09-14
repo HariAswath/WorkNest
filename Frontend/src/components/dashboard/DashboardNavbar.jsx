@@ -120,13 +120,35 @@ export default function DashboardNavbar({ onOpenCreateModal, searchQuery, setSea
                   </div>
                 </div>
 
-                <button
-                  onClick={handleLogout}
-                  className="w-full px-3 py-2 rounded-xl text-left text-xs font-medium text-rose-300 hover:text-rose-200 hover:bg-rose-500/10 transition-colors flex items-center gap-2 cursor-pointer"
-                >
-                  <LogOut className="w-3.5 h-3.5 text-rose-400" />
-                  Sign out
-                </button>
+                <div className="space-y-1 mb-1.5">
+                  <Link
+                    to="/profile"
+                    onClick={() => setDropdownOpen(false)}
+                    className="w-full px-3 py-2 rounded-xl text-left text-xs font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-2"
+                  >
+                    <User className="w-3.5 h-3.5 text-indigo-400" />
+                    Profile & Activity
+                  </Link>
+
+                  <Link
+                    to="/settings"
+                    onClick={() => setDropdownOpen(false)}
+                    className="w-full px-3 py-2 rounded-xl text-left text-xs font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-2"
+                  >
+                    <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+                    Account Settings
+                  </Link>
+                </div>
+
+                <div className="border-t border-white/5 pt-1.5">
+                  <button
+                    onClick={handleLogout}
+                    className="w-full px-3 py-2 rounded-xl text-left text-xs font-medium text-rose-300 hover:text-rose-200 hover:bg-rose-500/10 transition-colors flex items-center gap-2 cursor-pointer"
+                  >
+                    <LogOut className="w-3.5 h-3.5 text-rose-400" />
+                    Sign out
+                  </button>
+                </div>
               </div>
             )}
           </div>

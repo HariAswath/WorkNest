@@ -44,6 +44,10 @@ export function AuthProvider({ children }) {
     try {
       const response = await authApi.login({ email, password });
       const userData = response.data?.user || response.data;
+      const accessToken = response.data?.accessToken;
+      if (accessToken) {
+        localStorage.setItem('worknest_token', accessToken);
+      }
       setUser(userData);
       localStorage.setItem('worknest_user', JSON.stringify(userData));
       return { success: true, data: response.data };
@@ -58,6 +62,9 @@ export function AuthProvider({ children }) {
     setAuthError(null);
     try {
       const response = await authApi.register({ email, username, password });
+      if (response.data?.accessToken) {
+        localStorage.setItem('worknest_token', response.data.accessToken);
+      }
       return { success: true, data: response.data, message: response.message };
     } catch (err) {
       setAuthError(err.message || 'Registration failed');
@@ -74,6 +81,7 @@ export function AuthProvider({ children }) {
     } finally {
       setUser(null);
       localStorage.removeItem('worknest_user');
+      localStorage.removeItem('worknest_token');
     }
   };
 

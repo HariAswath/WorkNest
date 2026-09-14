@@ -8,6 +8,18 @@ export const apiClient = axios.create({
   },
 });
 
+// Request interceptor to attach Bearer token if present
+apiClient.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('worknest_token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
 // Response interceptor to format error messages nicely
 apiClient.interceptors.response.use(
   (response) => response,
