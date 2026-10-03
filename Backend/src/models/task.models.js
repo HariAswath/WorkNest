@@ -27,6 +27,15 @@ const taskSchema = new Schema(
       enum: AvailableTaskStatuses,
       default: TaskStatusEnum.TODO,
     },
+    priority: {
+      type: String,
+      enum: ["low", "medium", "high"],
+      default: "medium",
+    },
+    dueDate: {
+      type: Date,
+      default: null,
+    },
     attachments: {
       type: [
         {
@@ -38,8 +47,10 @@ const taskSchema = new Schema(
       default: [],
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
-export const Task = mongoose.model("Task", taskSchema);
+taskSchema.index({ project: 1, status: 1 });
+taskSchema.index({ dueDate: 1 });
 
+export const Task = mongoose.model("Task", taskSchema);

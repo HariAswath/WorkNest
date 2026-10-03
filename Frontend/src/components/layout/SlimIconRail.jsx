@@ -17,7 +17,7 @@ import {
   Sparkles
 } from 'lucide-react';
 
-export default function SlimIconRail({ onOpenNotifications = () => {} }) {
+export default function SlimIconRail({ onOpenNotifications = () => { } }) {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, logout } = useAuth();
@@ -32,6 +32,7 @@ export default function SlimIconRail({ onOpenNotifications = () => {} }) {
   const isProjects = location.pathname === '/projects' || location.pathname.startsWith('/projects/');
   const isAnalytics = location.pathname === '/analytics';
   const isDiscussions = location.pathname === '/discussions';
+  const isCalendar = location.pathname === '/calendar';
   const isProfile = location.pathname === '/profile';
   const isSettings = location.pathname === '/settings';
 
@@ -67,12 +68,11 @@ export default function SlimIconRail({ onOpenNotifications = () => {} }) {
       badge: null,
     },
     {
-      to: '#',
+      to: '/calendar',
       label: 'Calendar',
       icon: Calendar,
-      isActive: false,
+      isActive: isCalendar,
       badge: null,
-      onClick: () => {},
     },
     {
       to: '#',
@@ -95,35 +95,25 @@ export default function SlimIconRail({ onOpenNotifications = () => {} }) {
       {/* Expanding Sidebar Panel */}
       <aside
         aria-label="Primary"
-        className={`absolute top-0 left-0 bottom-0 bg-[#111216] border-r border-white/10 flex flex-col justify-between py-5 transition-all duration-300 ease-in-out ${
-          isHovered
+        className={`absolute top-0 left-0 bottom-0 bg-[#111216] border-r border-white/10 flex flex-col justify-between py-5 transition-all duration-300 ease-in-out ${isHovered
             ? 'w-64 shadow-2xl shadow-black/90 px-3.5 bg-[#111216]/98 backdrop-blur-2xl'
             : 'w-16 px-0 items-center'
-        }`}
+          }`}
       >
         {/* Top Brand Logo & Header */}
         <div className="flex flex-col gap-6 w-full">
           <Link
             to="/dashboard"
-            className={`flex items-center gap-3 group transition-transform ${
-              isHovered ? 'px-2' : 'justify-center'
-            }`}
+            className={`flex items-center gap-3 group transition-transform ${isHovered ? 'px-2' : 'justify-center'
+              }`}
             title="WorkNest Studio"
           >
-            {/* Custom Curved Geometry Icon */}
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-b from-white/20 to-white/5 border border-white/10 flex items-center justify-center text-white shadow-lg shrink-0 group-hover:scale-105 transition-transform">
-              <svg
-                className="w-5 h-5 text-white"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M4 18V9a7 7 0 0 1 14 0v9" />
-                <circle cx="11" cy="11" r="2" />
-              </svg>
+            <div className="w-10 h-10 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center p-1 shadow-lg shrink-0 group-hover:scale-105 transition-transform overflow-hidden">
+              <img
+                src="/logo.png"
+                alt="WorkNest Logo"
+                className="w-full h-full object-contain"
+              />
             </div>
 
             {/* Brand Title (revealed on hover) */}
@@ -146,13 +136,11 @@ export default function SlimIconRail({ onOpenNotifications = () => {} }) {
               const Icon = item.icon;
               const content = (
                 <div
-                  className={`w-full h-10 rounded-xl flex items-center transition-all cursor-pointer ${
-                    isHovered ? 'px-3 gap-3 justify-between' : 'justify-center'
-                  } ${
-                    item.isActive
+                  className={`w-full h-10 rounded-xl flex items-center transition-all cursor-pointer ${isHovered ? 'px-3 gap-3 justify-between' : 'justify-center'
+                    } ${item.isActive
                       ? 'bg-white/10 text-white font-bold shadow-inner'
                       : 'text-slate-400 hover:text-white hover:bg-white/5'
-                  }`}
+                    }`}
                   title={!isHovered ? item.label : undefined}
                 >
                   <div className="flex items-center gap-3 min-w-0">
@@ -172,11 +160,10 @@ export default function SlimIconRail({ onOpenNotifications = () => {} }) {
 
                   {isHovered && item.badge && (
                     <span
-                      className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md ${
-                        item.badge === 'New'
+                      className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md ${item.badge === 'New'
                           ? 'bg-amber-400/20 text-amber-300 border border-amber-400/30'
                           : 'bg-white/10 text-slate-300'
-                      }`}
+                        }`}
                     >
                       {item.badge}
                     </span>
@@ -224,9 +211,8 @@ export default function SlimIconRail({ onOpenNotifications = () => {} }) {
           {/* Help & Support */}
           <button
             type="button"
-            className={`w-full h-10 rounded-xl flex items-center text-slate-400 hover:text-white hover:bg-white/5 transition-colors cursor-pointer ${
-              isHovered ? 'px-3 gap-3 justify-start' : 'justify-center'
-            }`}
+            className={`w-full h-10 rounded-xl flex items-center text-slate-400 hover:text-white hover:bg-white/5 transition-colors cursor-pointer ${isHovered ? 'px-3 gap-3 justify-start' : 'justify-center'
+              }`}
             title={!isHovered ? 'Help & Support' : undefined}
           >
             <HelpCircle className="w-4 h-4 shrink-0" />
@@ -241,9 +227,8 @@ export default function SlimIconRail({ onOpenNotifications = () => {} }) {
           <button
             type="button"
             onClick={handleLogout}
-            className={`w-full h-10 rounded-xl flex items-center text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors cursor-pointer ${
-              isHovered ? 'px-3 gap-3 justify-start' : 'justify-center'
-            }`}
+            className={`w-full h-10 rounded-xl flex items-center text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors cursor-pointer ${isHovered ? 'px-3 gap-3 justify-start' : 'justify-center'
+              }`}
             title={!isHovered ? 'Sign Out' : undefined}
           >
             <LogOut className="w-4 h-4 shrink-0" />
@@ -256,9 +241,8 @@ export default function SlimIconRail({ onOpenNotifications = () => {} }) {
 
           {/* Dark Mode Pill Toggle */}
           <div
-            className={`h-10 rounded-2xl bg-[#1a1c23] border border-white/5 flex items-center text-slate-300 shadow-inner ${
-              isHovered ? 'px-3 gap-3 justify-between' : 'w-10 justify-center mx-auto'
-            }`}
+            className={`h-10 rounded-2xl bg-[#1a1c23] border border-white/5 flex items-center text-slate-300 shadow-inner ${isHovered ? 'px-3 gap-3 justify-between' : 'w-10 justify-center mx-auto'
+              }`}
             title="Dark Studio Theme"
           >
             <div className="flex items-center gap-2">

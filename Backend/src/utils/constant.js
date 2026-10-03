@@ -24,3 +24,13 @@ export const DiscussionChannelEnum = {
 };
 
 export const AvailableDiscussionChannels = Object.values(DiscussionChannelEnum);
+
+export const EventTypeEnum = {
+  MILESTONE: "milestone",
+  MEETING: "meeting",
+  RELEASE: "release",
+  STANDUP: "standup",
+  DEADLINE: "deadline",
+};
+
+export const AvailableEventTypes = Object.values(EventTypeEnum);

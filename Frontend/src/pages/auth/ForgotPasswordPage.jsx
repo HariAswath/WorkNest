@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { authApi } from '../../api/auth.api';
 import BorderGlow from '../../components/common/BorderGlow';
-import { ArrowLeft, Mail, AlertCircle, CheckCircle2, Loader2, KeyRound } from 'lucide-react';
+import { Mail, ArrowLeft, AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email.trim()) {
-      setError('Please enter your email address.');
+      setError('Please provide your email address.');
       return;
     }
 
@@ -22,19 +22,19 @@ export default function ForgotPasswordPage() {
     setSuccessMessage('');
 
     try {
-      const res = await authApi.forgotPassword({ email: email.trim() });
-      setSuccessMessage(res.message || 'Password reset link has been dispatched to your email.');
+      const res = await authApi.forgotPassword(email.trim());
+      setSuccessMessage(res.message || 'Password reset instructions have been sent to your email.');
     } catch (err) {
-      setError(err.message || 'Failed to send reset link. Please verify your email.');
+      setError(err.message || 'Could not send reset email. Please verify your address.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="relative min-h-screen bg-[#07090e] bg-fine-grid text-slate-100 flex flex-col justify-center items-center px-4 py-12 selection:bg-indigo-500/30 selection:text-white">
+    <div className="relative min-h-screen bg-[#0d0e12] bg-fine-grid text-slate-100 flex flex-col justify-center items-center px-4 py-12 selection:bg-amber-500/30 selection:text-white">
       {/* Background Radial Glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-indigo-600/15 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-amber-500/[0.06] rounded-full blur-[140px] pointer-events-none" />
 
       {/* Top Navigation / Back to Login */}
       <div className="w-full max-w-md mb-6 flex items-center justify-between z-10">
@@ -51,18 +51,28 @@ export default function ForgotPasswordPage() {
       <div className="w-full max-w-md z-10">
         <BorderGlow
           borderRadius={24}
-          backgroundColor="#0a0e1a"
-          glowColor="200 80 60"
-          colors={['#38bdf8', '#818cf8', '#c084fc']}
+          backgroundColor="#16181d"
+          glowColor="45 90 55"
+          colors={['#f59e0b', '#fbbf24', '#d97706']}
           glowRadius={30}
-          className="p-8 sm:p-10 shadow-2xl backdrop-blur-2xl"
+          className="p-8 sm:p-10 shadow-2xl backdrop-blur-2xl border border-white/5"
         >
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="w-12 h-12 mx-auto rounded-2xl bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 mb-4 shadow-lg shadow-indigo-600/20">
-              <KeyRound className="w-6 h-6" />
-            </div>
-            <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">Forgot password?</h1>
+            <Link to="/" className="inline-flex items-center gap-2.5 mb-4 group">
+              <div className="w-10 h-10 rounded-xl bg-[#111216] border border-white/10 flex items-center justify-center p-1 shadow-lg group-hover:scale-105 transition-transform overflow-hidden">
+                <img
+                  src="/logo.png"
+                  alt="WorkNest Logo"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="text-2xl font-black tracking-tight text-white">WorkNest</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+              </div>
+            </Link>
+            <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight">Forgot password?</h1>
             <p className="text-xs sm:text-sm text-slate-400 mt-1.5">No worries, we'll send you recovery instructions</p>
           </div>
 
@@ -103,7 +113,7 @@ export default function ForgotPasswordPage() {
                       setError('');
                     }}
                     placeholder="name@company.com"
-                    className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900/90 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all"
+                    className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#111216] border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all"
                   />
                 </div>
               </div>
@@ -112,11 +122,11 @@ export default function ForgotPasswordPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white font-bold text-sm shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/50 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 disabled:pointer-events-none"
+                  className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/20 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 disabled:pointer-events-none"
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <Loader2 className="w-4 h-4 animate-spin text-slate-950" />
                       <span>Sending reset link...</span>
                     </>
                   ) : (
@@ -129,7 +139,7 @@ export default function ForgotPasswordPage() {
             <div className="text-center pt-2">
               <Link
                 to="/login"
-                className="inline-flex items-center justify-center w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm transition-all"
+                className="inline-flex items-center justify-center w-full py-2.5 px-4 rounded-xl bg-[#111216] hover:bg-[#1a1d24] text-white font-semibold text-sm border border-white/10 transition-all"
               >
                 Return to Login
               </Link>
@@ -139,7 +149,7 @@ export default function ForgotPasswordPage() {
           {/* Footer */}
           <div className="mt-8 pt-6 border-t border-white/5 text-center text-xs text-slate-400">
             Remember your password?{' '}
-            <Link to="/login" className="text-indigo-400 font-semibold hover:text-indigo-300 transition-colors">
+            <Link to="/login" className="text-amber-400 font-semibold hover:text-amber-300 transition-colors">
               Sign in
             </Link>
           </div>

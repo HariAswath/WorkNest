@@ -24,6 +24,7 @@ import projectRouter from "./routes/project.routes.js";
 import taskRouter from "./routes/task.routes.js";
 import noteRouter from "./routes/note.routes.js";
 import discussionRouter from "./routes/discussion.routes.js";
+import calendarRouter from "./routes/calendar.routes.js";
 import { errorHandler } from "./middleware/error.middleware.js";
 
 
@@ -33,6 +34,7 @@ app.use("/api/v1/projects", projectRouter);
 app.use("/api/v1/tasks", taskRouter);
 app.use("/api/v1/notes", noteRouter);
 app.use("/api/v1/discussions", discussionRouter);
+app.use("/api/v1/calendar", calendarRouter);
 
 
 app.get('/', (req, res) => {

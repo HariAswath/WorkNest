@@ -1,5 +1,10 @@
 import { body } from "express-validator";
-import { AvailableUserRole, AvailableTaskStatuses, AvailableDiscussionChannels } from "../utils/constant.js";
+import {
+  AvailableUserRole,
+  AvailableTaskStatuses,
+  AvailableDiscussionChannels,
+  AvailableEventTypes,
+} from "../utils/constant.js";
 
 const userRegisterValidator = () => {
   return [
@@ -153,6 +158,36 @@ const toggleReactionValidator = () => {
   return [body("emoji").trim().notEmpty().withMessage("Emoji is required")];
 };
 
+const createCalendarEventValidator = () => {
+  return [
+    body("title").trim().notEmpty().withMessage("Event title is required"),
+    body("startDate").notEmpty().withMessage("Start date is required"),
+    body("eventType")
+      .optional()
+      .isIn(AvailableEventTypes)
+      .withMessage("Invalid event type"),
+    body("project").optional({ values: "null" }).isMongoId().withMessage("Invalid project ID"),
+    body("color")
+      .optional()
+      .isIn(["amber", "indigo", "emerald", "rose", "cyan", "purple"])
+      .withMessage("Invalid color code"),
+  ];
+};
+
+const updateCalendarEventValidator = () => {
+  return [
+    body("title").optional().trim().notEmpty().withMessage("Title cannot be empty"),
+    body("eventType")
+      .optional()
+      .isIn(AvailableEventTypes)
+      .withMessage("Invalid event type"),
+    body("color")
+      .optional()
+      .isIn(["amber", "indigo", "emerald", "rose", "cyan", "purple"])
+      .withMessage("Invalid color code"),
+  ];
+};
+
 export {
   userRegisterValidator,
   userLoginValidator,
@@ -171,5 +206,7 @@ export {
   updateDiscussionValidator,
   createDiscussionReplyValidator,
   toggleReactionValidator,
+  createCalendarEventValidator,
+  updateCalendarEventValidator,
 };
 

@@ -15,6 +15,7 @@ import ProjectWorkspacePage from './pages/workspace/ProjectWorkspacePage';
 import ProfilePage from './pages/profile/ProfilePage';
 import SettingsPage from './pages/settings/SettingsPage';
 import DiscussionsPage from './pages/discussions/DiscussionsPage';
+import CalendarPage from './pages/calendar/CalendarPage';
 
 export default function App() {
   return (
@@ -61,6 +62,14 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <DiscussionsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/calendar"
+            element={
+              <ProtectedRoute>
+                <CalendarPage />
               </ProtectedRoute>
             }
           />

@@ -33,10 +33,12 @@ export default function DashboardNavbar({ onOpenCreateModal, searchQuery, setSea
         {/* Left: Brand Logo & Links */}
         <div className="flex items-center gap-6">
           <Link to="/dashboard" className="flex items-center gap-3 group focus:outline-none shrink-0">
-            <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center p-0.5 shadow-sm transition-transform duration-200 group-hover:scale-105 bg-indigo-600/30 border border-indigo-400/30">
-              <svg className="w-5 h-5 text-indigo-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-              </svg>
+            <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center p-0.5 shadow-sm transition-transform duration-200 group-hover:scale-105 bg-white/5 border border-white/10">
+              <img
+                src="/logo.png"
+                alt="WorkNest Logo"
+                className="w-full h-full object-contain"
+              />
             </div>
             <span className="text-white text-lg font-bold tracking-tight group-hover:text-indigo-400 transition-colors">WorkNest</span>
           </Link>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import BorderGlow from '../../components/common/BorderGlow';
-import { Eye, EyeOff, ArrowLeft, Lock, Mail, AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
+import { Eye, EyeOff, ArrowLeft, Lock, Mail, AlertCircle, Loader2 } from 'lucide-react';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -52,10 +52,10 @@ export default function LoginPage() {
   const displayError = localError || authError;
 
   return (
-    <div className="relative min-h-screen bg-[#07090e] bg-fine-grid text-slate-100 flex flex-col justify-center items-center px-4 py-12 selection:bg-indigo-500/30 selection:text-white">
+    <div className="relative min-h-screen bg-[#0d0e12] bg-fine-grid text-slate-100 flex flex-col justify-center items-center px-4 py-12 selection:bg-amber-500/30 selection:text-white">
       {/* Background Radial Glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-indigo-600/15 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-1/4 left-1/3 w-[400px] h-[400px] bg-cyan-600/10 rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-amber-500/[0.06] rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-1/3 w-[400px] h-[400px] bg-amber-600/[0.03] rounded-full blur-[130px] pointer-events-none" />
 
       {/* Top Navigation / Back to Home */}
       <div className="w-full max-w-md mb-6 flex items-center justify-between z-10">
@@ -68,27 +68,32 @@ export default function LoginPage() {
         </Link>
       </div>
 
-      {/* Auth Card with Multi-Color BorderGlow */}
+      {/* Auth Card with Amber Studio BorderGlow */}
       <div className="w-full max-w-md z-10">
         <BorderGlow
           borderRadius={24}
-          backgroundColor="#0a0e1a"
-          glowColor="240 80 65"
-          colors={['#818cf8', '#c084fc', '#38bdf8']}
+          backgroundColor="#16181d"
+          glowColor="45 90 55"
+          colors={['#f59e0b', '#fbbf24', '#d97706']}
           glowRadius={30}
-          className="p-8 sm:p-10 shadow-2xl backdrop-blur-2xl"
+          className="p-8 sm:p-10 shadow-2xl backdrop-blur-2xl border border-white/5"
         >
           {/* Header */}
           <div className="text-center mb-8">
             <Link to="/" className="inline-flex items-center gap-2.5 mb-4 group">
-              <div className="w-10 h-10 rounded-xl bg-indigo-600/30 border border-indigo-400/30 flex items-center justify-center p-1 shadow-lg shadow-indigo-600/20 group-hover:scale-105 transition-transform">
-                <svg className="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                </svg>
+              <div className="w-10 h-10 rounded-xl bg-[#111216] border border-white/10 flex items-center justify-center p-1 shadow-lg group-hover:scale-105 transition-transform overflow-hidden">
+                <img
+                  src="/logo.png"
+                  alt="WorkNest Logo"
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <span className="text-2xl font-black tracking-tight text-white">WorkNest</span>
+              <div className="flex items-center gap-1.5">
+                <span className="text-2xl font-black tracking-tight text-white">WorkNest</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+              </div>
             </Link>
-            <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">Welcome back</h1>
+            <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight">Welcome back</h1>
             <p className="text-xs sm:text-sm text-slate-400 mt-1.5">Enter your credentials to access your workspaces</p>
           </div>
 
@@ -120,7 +125,7 @@ export default function LoginPage() {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="name@company.com"
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900/90 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#111216] border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all"
                 />
               </div>
             </div>
@@ -133,7 +138,7 @@ export default function LoginPage() {
                 </label>
                 <Link
                   to="/forgot-password"
-                  className="text-xs text-indigo-400 hover:text-indigo-300 transition-colors"
+                  className="text-xs text-amber-400 hover:text-amber-300 transition-colors"
                 >
                   Forgot password?
                 </Link>
@@ -151,7 +156,7 @@ export default function LoginPage() {
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="••••••••••••"
-                  className="w-full pl-10 pr-11 py-2.5 rounded-xl bg-slate-900/90 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all"
+                  className="w-full pl-10 pr-11 py-2.5 rounded-xl bg-[#111216] border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all"
                 />
                 <button
                   type="button"
@@ -186,7 +191,7 @@ export default function LoginPage() {
           {/* Footer link to Register */}
           <div className="mt-8 pt-6 border-t border-white/5 text-center text-xs text-slate-400">
             Don't have an account?{' '}
-            <Link to="/register" className="text-indigo-400 font-semibold hover:text-indigo-300 transition-colors underline-offset-4 hover:underline">
+            <Link to="/register" className="text-amber-400 font-semibold hover:text-amber-300 transition-colors underline-offset-4 hover:underline">
               Create an account
             </Link>
           </div>

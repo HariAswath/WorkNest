@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { authApi } from '../../api/auth.api';
 import BorderGlow from '../../components/common/BorderGlow';
-import { Lock, Eye, EyeOff, AlertCircle, CheckCircle2, Loader2, ArrowLeft } from 'lucide-react';
+import { Eye, EyeOff, ArrowLeft, Lock, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 
 export default function ResetPasswordPage() {
   const { resetToken } = useParams();
@@ -17,10 +17,12 @@ export default function ResetPasswordPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password.length < 6) {
+
+    if (!password || password.length < 6) {
       setError('Password must be at least 6 characters long.');
       return;
     }
+
     if (password !== confirmPassword) {
       setError('Passwords do not match.');
       return;
@@ -30,25 +32,22 @@ export default function ResetPasswordPage() {
     setError('');
 
     try {
-      await authApi.resetPassword({
-        resetToken,
-        newPassword: password,
-      });
+      await authApi.resetPassword(resetToken, password);
       setSuccess(true);
       setTimeout(() => {
         navigate('/login');
       }, 3000);
     } catch (err) {
-      setError(err.message || 'Token is invalid or has expired. Please request a new link.');
+      setError(err.message || 'Token is invalid or has expired.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="relative min-h-screen bg-[#07090e] bg-fine-grid text-slate-100 flex flex-col justify-center items-center px-4 py-12 selection:bg-indigo-500/30 selection:text-white">
+    <div className="relative min-h-screen bg-[#0d0e12] bg-fine-grid text-slate-100 flex flex-col justify-center items-center px-4 py-12 selection:bg-amber-500/30 selection:text-white">
       {/* Background Radial Glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-indigo-600/15 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-amber-500/[0.06] rounded-full blur-[140px] pointer-events-none" />
 
       {/* Top Navigation */}
       <div className="w-full max-w-md mb-6 flex items-center justify-between z-10">
@@ -65,14 +64,27 @@ export default function ResetPasswordPage() {
       <div className="w-full max-w-md z-10">
         <BorderGlow
           borderRadius={24}
-          backgroundColor="#0a0e1a"
-          glowColor="260 80 65"
-          colors={['#818cf8', '#c084fc', '#38bdf8']}
+          backgroundColor="#16181d"
+          glowColor="45 90 55"
+          colors={['#f59e0b', '#fbbf24', '#d97706']}
           glowRadius={30}
-          className="p-8 sm:p-10 shadow-2xl backdrop-blur-2xl"
+          className="p-8 sm:p-10 shadow-2xl backdrop-blur-2xl border border-white/5"
         >
           <div className="text-center mb-8">
-            <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">Set new password</h1>
+            <Link to="/" className="inline-flex items-center gap-2.5 mb-4 group">
+              <div className="w-10 h-10 rounded-xl bg-[#111216] border border-white/10 flex items-center justify-center p-1 shadow-lg group-hover:scale-105 transition-transform overflow-hidden">
+                <img
+                  src="/logo.png"
+                  alt="WorkNest Logo"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="text-2xl font-black tracking-tight text-white">WorkNest</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+              </div>
+            </Link>
+            <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight">Set new password</h1>
             <p className="text-xs sm:text-sm text-slate-400 mt-1.5">Must be at least 6 characters long</p>
           </div>
 
@@ -113,12 +125,12 @@ export default function ResetPasswordPage() {
                       setError('');
                     }}
                     placeholder="••••••••••••"
-                    className="w-full pl-10 pr-11 py-2.5 rounded-xl bg-slate-900/90 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all"
+                    className="w-full pl-10 pr-11 py-2.5 rounded-xl bg-[#111216] border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-500 hover:text-slate-300"
+                    className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-500 hover:text-slate-300 cursor-pointer"
                   >
                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
@@ -143,7 +155,7 @@ export default function ResetPasswordPage() {
                       setError('');
                     }}
                     placeholder="••••••••••••"
-                    className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900/90 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all"
+                    className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#111216] border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all"
                   />
                 </div>
               </div>
@@ -152,11 +164,11 @@ export default function ResetPasswordPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-sm shadow-lg shadow-indigo-600/30 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                  className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/20 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <Loader2 className="w-4 h-4 animate-spin text-slate-950" />
                       <span>Updating password...</span>
                     </>
                   ) : (
