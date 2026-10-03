@@ -1,4 +1,4 @@
-# 🚀 WorkNest — High-Velocity Project Management Studio
+# WorkNest — High-Velocity Project Management Studio
 
 <div align="center">
   <img src="Frontend/public/logo.png" alt="WorkNest Logo" width="100" height="100" />
@@ -17,43 +17,43 @@
 
 ---
 
-## 🌟 Features Overview
+## Features Overview
 
-### 📋 1. Visual Kanban & Subtask Engine
+### 1. Visual Kanban & Subtask Engine
 - **Customizable Pipelines**: Organize project workflows with dynamic stages (*To Do, In Progress, In Review, Completed*).
 - **Subtask Hierarchy**: Break complex tasks into subtasks with real-time percentage completion tracking.
 - **Priority & Due Date Badges**: Urgent, High, Medium, and Low priority routing with visual countdown indicators.
 - **File Attachments**: Upload and link technical assets, logs, and screenshots directly to task cards.
 
-### 💬 2. Threaded Discussions & RFC Hub
+### 2. Threaded Discussions & RFC Hub
 - **Team Discussion Channels**: Dedicated channels for `#architecture`, `#sprint-retrospectives`, and `#frontend-ux`.
 - **Pinned Specifications**: Pin key architectural RFCs and decisions with syntax-highlighted code blocks.
-- **Reactions & @Mentions**: Engage with team replies via reaction emojis (🔥, 🚀, 👍) and inline discussions.
+- **Reactions & @Mentions**: Engage with team replies via reaction counts and inline discussion threads.
 
-### 📅 3. Sprint & Milestone Calendar
+### 3. Sprint & Milestone Calendar
 - **Full Calendar Timeline**: View sprint deliverables, product launch milestones, and scheduled syncs on a monthly calendar grid.
 - **Color-Coded Priority Events**: Identify deadlines and active sprints at a glance.
 - **Interactive Day Selector**: Inspect day-specific task agendas and milestones.
 
-### 🛡️ 4. Granular Role-Based Access Control (RBAC)
+### 4. Granular Role-Based Access Control (RBAC)
 - **Role Permissions**: Three-tier permission architecture:
   - **Admin / Workspace Owner**: Full access to project configuration, members, roles, notes, and task pipelines.
   - **Project Admin**: Create, edit, and delete tasks and subtasks within assigned spaces.
   - **Team Member**: View projects, mark subtasks complete, and participate in discussions.
 - **Session Security**: HTTP-only JWT cookies, encrypted refresh tokens, CSRF protection, and email verification.
 
-### 🔌 5. Developer Webhooks & Integrations
+### 5. Developer Webhooks & Integrations
 - **Slack & Discord Alerts**: Automatic webhook dispatches on task status mutations and comments.
 - **API Token Management**: Generate bearer tokens for REST integration with CI/CD and CLI pipelines.
 - **Data Sovereignty**: Export complete workspace snapshots into JSON anytime.
 
-### 🎨 6. Dark Studio Design System
+### 6. Dark Studio Design System
 - **Obsidian Dark Studio Aesthetics**: High-contrast `#0d0e12` / `#16181d` surfaces paired with glowing amber/gold accents.
-- **Customization**: Theme modes, density controls (Compact/Comfortable), custom avatar themes, and haptic sound toggles.
+- **Customization**: Theme modes, density controls (Compact/Comfortable), custom avatar themes, and sound toggles.
 
 ---
 
-## 🏗️ Architecture & Tech Stack
+## Architecture & Tech Stack
 
 ```
 project-management-application/
@@ -83,7 +83,7 @@ project-management-application/
 
 ---
 
-## 🚦 Getting Started (Local Development)
+## Getting Started (Local Development)
 
 ### Prerequisites
 - **Node.js**: v18.0.0 or higher
@@ -149,11 +149,11 @@ npm run dev
 
 ---
 
-## 📡 REST API Documentation
+## REST API Documentation
 
 Base URL: `/api/v1`
 
-### 🔐 Authentication (`/api/v1/auth`)
+### Authentication (`/api/v1/auth`)
 | Method | Endpoint | Description | Access |
 |---|---|---|---|
 | `POST` | `/register` | Register new user account | Public |
@@ -166,7 +166,7 @@ Base URL: `/api/v1`
 | `POST` | `/forgot-password` | Send password reset email | Public |
 | `POST` | `/reset-password/:token` | Reset password with token | Public |
 
-### 📁 Projects (`/api/v1/projects`)
+### Projects (`/api/v1/projects`)
 | Method | Endpoint | Description | Access |
 |---|---|---|---|
 | `GET` | `/` | List all accessible workspaces | Authenticated |
@@ -179,7 +179,7 @@ Base URL: `/api/v1`
 | `PUT` | `/:projectId/members/:userId` | Update member role (*admin / member*) | Admin |
 | `DELETE` | `/:projectId/members/:userId` | Remove member from workspace | Admin |
 
-### ✅ Tasks & Subtasks (`/api/v1/tasks`)
+### Tasks & Subtasks (`/api/v1/tasks`)
 | Method | Endpoint | Description | Access |
 |---|---|---|---|
 | `GET` | `/:projectId` | List all project tasks | Member+ |
@@ -191,7 +191,7 @@ Base URL: `/api/v1`
 | `PUT` | `/:projectId/st/:subTaskId` | Toggle subtask completion status | Member+ |
 | `DELETE` | `/:projectId/st/:subTaskId` | Delete subtask | Admin / Project Admin |
 
-### 💬 Discussions (`/api/v1/discussions`)
+### Discussions (`/api/v1/discussions`)
 | Method | Endpoint | Description | Access |
 |---|---|---|---|
 | `GET` | `/:projectId` | List all channel threads | Member+ |
@@ -201,7 +201,7 @@ Base URL: `/api/v1`
 | `POST` | `/:projectId/d/:discussionId/reactions` | Toggle emoji reaction | Member+ |
 | `PUT` | `/:projectId/d/:discussionId/pin` | Pin/unpin discussion RFC | Admin |
 
-### 📅 Calendar (`/api/v1/calendar`)
+### Calendar (`/api/v1/calendar`)
 | Method | Endpoint | Description | Access |
 |---|---|---|---|
 | `GET` | `/:projectId` | Fetch project calendar milestones & events | Member+ |
@@ -211,7 +211,7 @@ Base URL: `/api/v1`
 
 ---
 
-## 🌐 Production Deployment Guide
+## Production Deployment Guide
 
 ### Deploying Backend on Render
 1. Create a **Web Service** on [render.com](https://render.com).
@@ -235,24 +235,24 @@ Base URL: `/api/v1`
 
 ---
 
-## 👥 Role Permissions Matrix
+## Role Permissions Matrix
 
 | Capability | Admin (Owner) | Project Admin | Member |
 |---|:---:|:---:|:---:|
-| Create / Delete Workspace | ✅ | ❌ | ❌ |
-| Manage Team Roles & Invites | ✅ | ❌ | ❌ |
-| Create / Edit Tasks | ✅ | ✅ | ❌ |
-| Update Subtask Completion | ✅ | ✅ | ✅ |
-| Post in Discussions & RFCs | ✅ | ✅ | ✅ |
-| Pin Architecture RFCs | ✅ | ❌ | ❌ |
-| Create Calendar Milestones | ✅ | ✅ | ❌ |
-| Configure Webhooks & Tokens | ✅ | ❌ | ❌ |
+| Create / Delete Workspace | Yes | No | No |
+| Manage Team Roles & Invites | Yes | No | No |
+| Create / Edit Tasks | Yes | Yes | No |
+| Update Subtask Completion | Yes | Yes | Yes |
+| Post in Discussions & RFCs | Yes | Yes | Yes |
+| Pin Architecture RFCs | Yes | No | No |
+| Create Calendar Milestones | Yes | Yes | No |
+| Configure Webhooks & Tokens | Yes | No | No |
 
 ---
 
-## 📜 License
+## License
 This project is licensed under the [ISC License](LICENSE).
 
 <div align="center">
-  <sub>Crafted with precision for high-output engineering teams. © WorkNest Studio Inc.</sub>
+  <sub>Crafted with precision for high-output engineering teams. WorkNest Studio Inc.</sub>
 </div>
