@@ -104,9 +104,11 @@ const login = asyncHandler(async (req, res) => {
     "-password -refreshToken -emailVerificationToken -emailVerificationExpiry",
   );
 
+  const isProd = process.env.NODE_ENV === "production";
   const options = {
     httpOnly: true,
-    secure: true,
+    secure: isProd,
+    sameSite: isProd ? "none" : "lax",
   };
 
   return res
@@ -138,9 +140,11 @@ const logoutUser = asyncHandler(async (req, res) => {
       new: true,
     },
   );
+  const isProd = process.env.NODE_ENV === "production";
   const options = {
     httpOnly: true,
-    secure: true,
+    secure: isProd,
+    sameSite: isProd ? "none" : "lax",
   };
   return res
     .status(200)
