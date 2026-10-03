@@ -23,6 +23,7 @@ import authRouter from "./routes/auth.routes.js";
 import projectRouter from "./routes/project.routes.js";
 import taskRouter from "./routes/task.routes.js";
 import noteRouter from "./routes/note.routes.js";
+import discussionRouter from "./routes/discussion.routes.js";
 import { errorHandler } from "./middleware/error.middleware.js";
 
 
@@ -31,6 +32,7 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/projects", projectRouter);
 app.use("/api/v1/tasks", taskRouter);
 app.use("/api/v1/notes", noteRouter);
+app.use("/api/v1/discussions", discussionRouter);
 
 
 app.get('/', (req, res) => {

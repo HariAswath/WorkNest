@@ -13,6 +13,8 @@ import ProjectsPage from './pages/dashboard/ProjectsPage';
 import AnalyticsPage from './pages/dashboard/AnalyticsPage';
 import ProjectWorkspacePage from './pages/workspace/ProjectWorkspacePage';
 import ProfilePage from './pages/profile/ProfilePage';
+import SettingsPage from './pages/settings/SettingsPage';
+import DiscussionsPage from './pages/discussions/DiscussionsPage';
 
 export default function App() {
   return (
@@ -55,6 +57,14 @@ export default function App() {
             }
           />
           <Route
+            path="/discussions"
+            element={
+              <ProtectedRoute>
+                <DiscussionsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/projects/:projectId"
             element={
               <ProtectedRoute>
@@ -74,7 +84,7 @@ export default function App() {
             path="/settings"
             element={
               <ProtectedRoute>
-                <ProfilePage />
+                <SettingsPage />
               </ProtectedRoute>
             }
           />

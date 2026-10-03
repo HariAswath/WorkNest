@@ -29,6 +29,7 @@ export default function Sidebar({ onOpenNotifications = () => {} }) {
   const isDashboard = location.pathname === '/dashboard';
   const isProjects = location.pathname === '/projects' || location.pathname.startsWith('/projects/');
   const isAnalytics = location.pathname === '/analytics';
+  const isDiscussions = location.pathname === '/discussions';
   const isProfile = location.pathname === '/profile';
   const isSettings = location.pathname === '/settings';
 
@@ -57,10 +58,10 @@ export default function Sidebar({ onOpenNotifications = () => {} }) {
       badge: null,
     },
     {
-      to: '/dashboard',
+      to: '/discussions',
       label: 'Discussions',
       icon: MessageSquare,
-      isActive: false,
+      isActive: isDiscussions,
       badge: null,
     },
     {
@@ -78,20 +79,6 @@ export default function Sidebar({ onOpenNotifications = () => {} }) {
       badge: null,
       hasDot: false,
       onClick: onOpenNotifications,
-    },
-    {
-      to: '/settings',
-      label: 'Settings',
-      icon: Settings,
-      isActive: isSettings,
-      badge: null,
-    },
-    {
-      to: '/profile',
-      label: 'User Profile',
-      icon: User,
-      isActive: isProfile,
-      badge: null,
     },
   ];
 

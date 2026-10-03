@@ -1,5 +1,5 @@
 import { body } from "express-validator";
-import { AvailableUserRole, AvailableTaskStatuses } from "../utils/constant.js";
+import { AvailableUserRole, AvailableTaskStatuses, AvailableDiscussionChannels } from "../utils/constant.js";
 
 const userRegisterValidator = () => {
   return [
@@ -116,6 +116,43 @@ const updateNoteValidator = () => {
   return [body("content").trim().notEmpty().withMessage("Content is required")];
 };
 
+const createDiscussionValidator = () => {
+  return [
+    body("title").trim().notEmpty().withMessage("Discussion title is required"),
+    body("content").trim().notEmpty().withMessage("Discussion content is required"),
+    body("channel")
+      .optional()
+      .isIn(AvailableDiscussionChannels)
+      .withMessage("Invalid discussion channel"),
+    body("project").optional({ values: "null" }).isMongoId().withMessage("Invalid project ID"),
+    body("tags").optional().isArray().withMessage("Tags must be an array of strings"),
+    body("linkedTasks").optional().isArray().withMessage("Linked tasks must be an array of task IDs"),
+  ];
+};
+
+const updateDiscussionValidator = () => {
+  return [
+    body("title").optional().trim().notEmpty().withMessage("Title cannot be empty"),
+    body("content").optional().trim().notEmpty().withMessage("Content cannot be empty"),
+    body("channel")
+      .optional()
+      .isIn(AvailableDiscussionChannels)
+      .withMessage("Invalid discussion channel"),
+    body("tags").optional().isArray().withMessage("Tags must be an array of strings"),
+  ];
+};
+
+const createDiscussionReplyValidator = () => {
+  return [
+    body("content").trim().notEmpty().withMessage("Reply content is required"),
+    body("parentReply").optional({ values: "null" }).isMongoId().withMessage("Invalid parent reply ID"),
+  ];
+};
+
+const toggleReactionValidator = () => {
+  return [body("emoji").trim().notEmpty().withMessage("Emoji is required")];
+};
+
 export {
   userRegisterValidator,
   userLoginValidator,
@@ -130,5 +167,9 @@ export {
   updateSubTaskValidator,
   createNoteValidator,
   updateNoteValidator,
+  createDiscussionValidator,
+  updateDiscussionValidator,
+  createDiscussionReplyValidator,
+  toggleReactionValidator,
 };
 
